@@ -41,14 +41,21 @@ ManageIQ Dev Environment Setup Script for Mac
 
 ### Running manageiq with foreman or evm
 
-To run manageiq in the foreground, you can use `miq_mac_dev/foreman`, or run Foreman yourself:
+To run manageiq in the foreground, you can either run the rails server directly with `miq_mac_dev/rails`, or run it yourself:
+
+```
+cd manageiq
+bundle exec rails s
+```
+
+or, you can run it with Foreman using `miq_mac_dev/foreman`, or run Foreman yourself:
 
 ```
 cd manageiq
 foreman start -p 3000
 ```
 
-To run manageiq in the background, you cam use, `miq_mac_dev/evm` or run evm yourself:
+To run manageiq in the background, you can instead use `miq_mac_dev/evm` or run evm yourself:
 
 ```
 cd manageiq

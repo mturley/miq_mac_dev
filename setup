@@ -95,12 +95,29 @@ bundle exec rake update:ui
 
 echo "DONE!"
 echo
-echo "To start manageiq with foreman:"
-echo "  miq_mac_dev/foreman"
-echo "    or"
-echo "  cd manageiq; foreman start -p 3000"
+echo "To start the manageiq rails server directly (foreground option 1):"
+echo "  miq_mac_dev/rails"
+echo "or:"
+echo "  cd manageiq"
+echo "  bundle exec rails s"
 echo
-echo "To start manageiq-ui-classic with webpack:"
+echo "To start manageiq with foreman (foreground option 2):"
+echo "  miq_mac_dev/foreman"
+echo "or:"
+echo "  cd manageiq"
+echo "  foreman start -p 3000"
+echo
+echo "To start manageiq with evm (background option):"
+echo "  miq_mac_dev/evm"
+echo "or:"
+echo "  cd manageiq"
+echo "  bundle exec rake evm:start"
+echo
+echo "Then navigate a browser to http://localhost:3000/ and log in with admin/smartvm."
+echo
+echo "For hot reloading, you'll need webpack. To start manageiq-ui-classic with webpack:"
 echo "  miq_mac_dev/webpack"
-echo "  cd manageiq-ui-classic; NODE_ENV=development ./node_modules/.bin/webpack-dev-server --config config/webpack/development.js"
+echo "or:"
+echo "  cd manageiq/plugins/manageiq-ui-classic"
+echo "  NODE_ENV=development ./node_modules/.bin/webpack-dev-server --config config/webpack/development.js"
 echo
