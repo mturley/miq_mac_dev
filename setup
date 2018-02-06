@@ -13,8 +13,11 @@ else
   exit 1
 fi
 
+echo "Switching to ruby-2.4.2"
+rvm use 2.4.2
+
 echo "Checking/installing homebrew dependencies..."
-brew install git pkg-config memcached postgresql cmake node yarn ruby
+brew install git pkg-config memcached postgresql cmake node yarn
 
 echo "Unlinking homebrew's xz if present to prevent conflicts with system xz libraries..."
 brew unlink xz
@@ -43,6 +46,8 @@ launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.memcached.plist
 echo "Cloning the manageiq and manageiq-ui-classic repositories..."
 cd ..
 git clone https://github.com/ManageIQ/manageiq.git
+mkdir -p manageiq/plugins
+cd manageiq/plugins
 git clone https://github.com/ManageIQ/manageiq-ui-classic
 
 if [ "$1" = "--with-v2v-plugin" ] ; then
@@ -62,19 +67,19 @@ if [ "$1" = "--with-v2v-plugin" ] ; then
   cd ..
 fi
 
-echo "Creating manageiq/Gemfile.dev.rb..."
-touch manageiq/Gemfile.dev.rb
-echo "gem 'miq_v2v_ui', :path => File.expand_path('../../miq_v2v_ui_plugin/', __dir__)" > manageiq/Gemfile.dev.rb
+cd ../../
 
 echo "Creating/replacing manageiq/Gemfile..."
 cp -v miq_mac_dev/Gemfile.example manageiq/Gemfile
 echo "Creating/replacing manageiq/Procfile..."
 cp -v miq_mac_dev/Procfile.example manageiq/Procfile
+echo "Creating/replacing manageiq/bundler.d/Gemfile.dev.rb..."
+mkdir -p manageiq/bundler.d
+cp -v miq_mac_dev/Gemfile.dev.rb.example manageiq/bundler.d/Gemfile.dev.rb
 
 echo "Setting up manageiq..."
 cd manageiq
 bin/setup
-bundle exec rake db:setup
 bin/update
 cd ..
 
@@ -82,7 +87,7 @@ echo "Creating a symbolic link to local manageiq in manageiq-ui-classic/spec/man
 ln -sv ../../manageiq manageiq-ui-classic/spec/manageiq
 
 echo "Setting up manageiq-ui-classic..."
-cd manageiq-ui-classic
+cd manageiq/plugins/manageiq-ui-classic
 npm install
 bin/setup
 bin/update

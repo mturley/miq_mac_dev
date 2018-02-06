@@ -1,0 +1,2 @@
+override_gem 'manageiq-ui-classic', :path => File.expand_path('../plugins/manageiq-ui-classic', __dir__)
+gem 'miq_v2v_ui', :path => File.expand_path('../plugins/miq_v2v_ui_plugin', __dir__)

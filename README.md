@@ -6,18 +6,28 @@ ManageIQ Dev Environment Setup Script for Mac
 
 1. Install Homebrew, if you don't have it already: https://brew.sh/
 
-2. Clone this repo in the directory where you want your manageiq repositories cloned.
+2. Install `rvm` (https://rvm.io/) and then run `rvm install 2.4.2`
 
-   `git clone https://github.com/mturley/miq_mac_dev`
+3. Clone this repo in the directory where you want your manageiq repositories cloned:
 
-   *Note: `miq_mac_dev/setup` will move up to the directory above miq_mac_dev and clone siblings next to it. Don't clone this repo in the same directory alongside existing manageiq and manageiq-ui-classic repos, use a fresh subdirectory if necessary:*
+   ```
+   git clone https://github.com/mturley/miq_mac_dev
+   ```
 
-   `mkdir miq; cd miq; git clone https://github.com/mturley/miq_mac_dev`
+   *Note: `miq_mac_dev/setup` will move up to the directory above `miq_mac_dev` and clone siblings next to it. **Don't clone this repo in the same directory alongside existing manageiq and manageiq-ui-classic repos, use a fresh subdirectory if necessary:***
 
-3. Run `miq_mac_dev/setup`. Be ready to provide a sudo password, you may be asked more than once.
+   ```
+   mkdir miq; cd miq; git clone https://github.com/mturley/miq_mac_dev
+   ```
 
-   `miq_mac_dev/setup` or `miq_mac_dev/setup --with-v2v-plugin`
-
+4. Run `setup`. Be ready to provide a sudo password, you may be asked more than once:
+   ```
+   miq_mac_dev/setup
+   ```
+   or:
+   ```
+   miq_mac_dev/setup --with-v2v-plugin
+   ```
 
 ## Setup Options
 
