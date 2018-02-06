@@ -9,5 +9,5 @@ else
   exit 1
 fi
 
-cd manageiq
+cd ../manageiq
 foreman start -p 3000

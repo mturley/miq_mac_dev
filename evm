@@ -9,5 +9,5 @@ else
   exit 1
 fi
 
-cd manageiq
+cd ../manageiq
 bundle exec rake evm:start
