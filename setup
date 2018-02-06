@@ -1,0 +1,101 @@
+#!/bin/sh
+
+# Available options: --with-v2v-plugin
+
+echo "${PWD}"
+
+if [ -d "../miq_mac_dev" -o -d "${PWD}/miq_mac_dev" ]
+then
+  echo "Preparing..."
+  cd ../miq_mac_dev 2>/dev/null || cd miq_mac_dev
+else
+  echo "Run this script from the miq_mac_dev directory or its parent."
+  exit 1
+fi
+
+echo "Checking/installing homebrew dependencies..."
+brew install git pkg-config memcached postgresql cmake node yarn ruby
+
+echo "Unlinking homebrew's xz if present to prevent conflicts with system xz libraries..."
+brew unlink xz
+
+echo "Checking/installing bundler..."
+sudo gem install bundler
+
+echo "Checking/installing foreman..."
+sudo gem install foreman
+
+echo "Checking/installing npm dependencies..."
+sudo npm install -g bower yarn gulp-cli webpack
+
+echo "Enabling PostgreSQL on boot..."
+mkdir -p ~/Library/LaunchAgents
+ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
+launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+
+echo "Creating the ManageIQ superuser..."
+psql -d postgres -c "CREATE ROLE root SUPERUSER LOGIN PASSWORD 'smartvm'"
+
+echo "Enabling Memcached on boot..."
+ln -sfv /usr/local/opt/memcached/homebrew.mxcl.memcached.plist ~/Library/LaunchAgents
+launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.memcached.plist
+
+echo "Cloning the manageiq and manageiq-ui-classic repositories..."
+cd ..
+git clone https://github.com/ManageIQ/manageiq.git
+git clone https://github.com/ManageIQ/manageiq-ui-classic
+
+if [ "$1" = "--with-v2v-plugin" ] ; then
+  echo "[v2v only] Switching to priley's v2v branch of manageiq-ui-classic..."
+  cd manageiq-ui-classic
+  git remote add priley https://github.com/priley86/manageiq-ui-classic.git
+  git fetch priley v2v:v2v
+  git checkout v2v
+  cd ..
+
+  echo "[v2v only] Cloning the miq_v2v_ui_plugin repository..."
+  git clone https://github.com/priley86/miq_v2v_ui_plugin
+
+  echo "[v2v only] Setting up miq_v2v_ui_plugin..."
+  cd miq_v2v_ui_plugin
+  npm install
+  cd ..
+fi
+
+echo "Creating manageiq/Gemfile.dev.rb..."
+touch manageiq/Gemfile.dev.rb
+echo "gem 'miq_v2v_ui', :path => File.expand_path('../../miq_v2v_ui_plugin/', __dir__)" > manageiq/Gemfile.dev.rb
+
+echo "Creating/replacing manageiq/Gemfile..."
+cp -v miq_mac_dev/Gemfile.example manageiq/Gemfile
+echo "Creating/replacing manageiq/Procfile..."
+cp -v miq_mac_dev/Procfile.example manageiq/Procfile
+
+echo "Setting up manageiq..."
+cd manageiq
+bin/setup
+bundle exec rake db:setup
+bin/update
+cd ..
+
+echo "Creating a symbolic link to local manageiq in manageiq-ui-classic/spec/manageiq..."
+ln -sv ../../manageiq manageiq-ui-classic/spec/manageiq
+
+echo "Setting up manageiq-ui-classic..."
+cd manageiq-ui-classic
+npm install
+bin/setup
+bin/update
+bundle exec rake update:ui
+
+echo "DONE!"
+echo
+echo "To start manageiq with foreman:"
+echo "  miq_mac_dev/foreman"
+echo "    or"
+echo "  cd manageiq; foreman start -p 3000"
+echo
+echo "To start manageiq-ui-classic with webpack:"
+echo "  miq_mac_dev/webpack"
+echo "  cd manageiq-ui-classic; NODE_ENV=development ./node_modules/.bin/webpack-dev-server --config config/webpack/development.js"
+echo
