@@ -1,8 +1,9 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 SCRIPT=`realpath $0`; cd `dirname $SCRIPT`
 
-~/.rvm/bin/rvm use 2.4.2
+source ~/.rvm/scripts/rvm
+rvm use 2.4.2
 
 cd ../manageiq/plugins/manageiq-ui-classic
 npm install
