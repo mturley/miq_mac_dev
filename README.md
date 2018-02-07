@@ -62,6 +62,8 @@ cd manageiq
 bundle exec rake evm:start
 ```
 
+Tip: Running evm again if it is running already will tell you what pid it is running on.
+
 At this point you should be able to view the rails application at http://localhost:3000/
 
 ### Running manageiq-ui-classic with webpack-dev-server
