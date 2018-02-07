@@ -71,7 +71,7 @@ At this point you should be able to view the rails application at http://localho
 You can use `miq_mac_dev/webpack`, or run WDS yourself:
 
 ```
-cd manageiq-ui-classic
+cd manageiq/plugins/manageiq-ui-classic
 env NODE_ENV=development ./node_modules/.bin/webpack-dev-server --config config/webpack/development.js
 ```
 
