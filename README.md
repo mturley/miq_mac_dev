@@ -2,6 +2,8 @@
 
 ManageIQ Dev Environment Setup Script for Mac
 
+This script will perform all the steps of the [ManageIQ Developer Setup Guide](https://github.com/ManageIQ/guides/blob/master/developer_setup.md) which apply to macOS developers.
+
 ## Setup
 
 1. Install Homebrew, if you don't have it already: https://brew.sh/
