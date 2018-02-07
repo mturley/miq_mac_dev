@@ -13,10 +13,10 @@ echo "Unlinking homebrew's xz if present to prevent conflicts with system xz lib
 brew unlink xz
 
 echo "Checking/installing bundler..."
-sudo gem install bundler
+gem install bundler
 
 echo "Checking/installing foreman..."
-sudo gem install foreman
+gem install foreman
 
 echo "Checking/installing npm dependencies..."
 sudo npm install -g bower yarn gulp-cli webpack
