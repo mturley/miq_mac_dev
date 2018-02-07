@@ -6,7 +6,7 @@ ManageIQ Dev Environment Setup Script for Mac
 
 1. Install Homebrew, if you don't have it already: https://brew.sh/
 
-2. Install `rvm` (https://rvm.io/) and then run `rvm install 2.4.2`
+2. Install `rvm` (https://rvm.io/) and then run `rvm install 2.4.2` (Note: the `setup` and `update-ui` scripts require `rvm`. If you want to use `rbenv` or something else, you'll just need to change those two scripts. The important thing is that you load ruby 2.4.2)
 
 3. Clone this repo in the directory where you want your manageiq repositories cloned:
 
