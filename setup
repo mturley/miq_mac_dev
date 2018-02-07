@@ -4,6 +4,7 @@
 SCRIPT=`realpath $0`; cd `dirname $SCRIPT`
 
 echo "Switching to ruby-2.4.2"
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 rvm use 2.4.2
 
 echo "Checking/installing homebrew dependencies..."
