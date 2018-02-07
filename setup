@@ -75,7 +75,7 @@ bin/update
 cd ..
 
 echo "Creating a symbolic link to local manageiq in manageiq-ui-classic/spec/manageiq..."
-ln -sv ../../manageiq manageiq-ui-classic/spec/manageiq
+ln -sv ../../../ manageiq/plugins/manageiq-ui-classic/spec/manageiq
 
 echo "Setting up manageiq-ui-classic..."
 cd manageiq/plugins/manageiq-ui-classic
