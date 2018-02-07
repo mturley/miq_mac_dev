@@ -2,7 +2,7 @@
 
 ManageIQ Dev Environment Setup Script for Mac
 
-This script will perform all the steps of the [ManageIQ Developer Setup Guide](https://github.com/ManageIQ/guides/blob/master/developer_setup.md) which apply to macOS developers.
+This repo's `setup` script will perform all the steps of the [ManageIQ Developer Setup Guide](https://github.com/ManageIQ/guides/blob/master/developer_setup.md) which apply to macOS developers. This repo also provides helper scripts to run `rails`, `foreman`, `evm` and `webpack`, and to `update` and `update-ui`. These scripts will ensure the right current directory and ruby version are used.
 
 ## Setup
 
