@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Available options: --with-v2v-plugin
 
-SCRIPT=`realpath $0`; cd `dirname $SCRIPT`
+WD=`pwd`; SCRIPT=`realpath $0`; cd `dirname $SCRIPT`
 
 echo "Switching to ruby-2.4.2"
 source ~/.rvm/scripts/rvm
@@ -111,4 +111,5 @@ echo "  miq_mac_dev/webpack"
 echo "or:"
 echo "  cd manageiq/plugins/manageiq-ui-classic"
 echo "  NODE_ENV=development ./node_modules/.bin/webpack-dev-server --config config/webpack/development.js"
-echo
+
+cd $WD

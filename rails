@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-SCRIPT=`realpath $0`; cd `dirname $SCRIPT`
+WD=`pwd`; SCRIPT=`realpath $0`; cd `dirname $SCRIPT`
 
 cd ../manageiq
 bundle exec rails s
+
+cd $WD

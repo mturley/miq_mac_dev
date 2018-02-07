@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-SCRIPT=`realpath $0`; cd `dirname $SCRIPT`
+WD=`pwd`; SCRIPT=`realpath $0`; cd `dirname $SCRIPT`
 
 source ~/.rvm/scripts/rvm
 rvm use 2.4.2
@@ -9,3 +9,5 @@ cd ../manageiq/plugins/manageiq-ui-classic
 npm install
 bundle install
 bundle exec rake update:ui
+
+cd $WD

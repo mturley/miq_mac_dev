@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-SCRIPT=`realpath $0`; cd `dirname $SCRIPT`
+WD=`pwd`; SCRIPT=`realpath $0`; cd `dirname $SCRIPT`
 
 cd ../manageiq/plugins/manageiq-ui-classic
 env NODE_ENV=development ./node_modules/.bin/webpack-dev-server --config config/webpack/development.js
+
+cd $WD
