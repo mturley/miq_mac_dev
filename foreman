@@ -1,13 +1,6 @@
 #!/bin/sh
 
-if [ -d "../miq_mac_dev" -o -d "${PWD}/miq_mac_dev" ]
-then
-  echo "Preparing..."
-  cd ../miq_mac_dev 2>/dev/null || cd miq_mac_dev
-else
-  echo "Run this script from the miq_mac_dev directory or its parent."
-  exit 1
-fi
+SCRIPT=`realpath $0`; cd `dirname $SCRIPT`
 
 cd ../manageiq
 foreman start -p 3000

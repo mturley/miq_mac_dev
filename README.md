@@ -39,7 +39,7 @@ ManageIQ Dev Environment Setup Script for Mac
 
 ## Usage
 
-### Running manageiq with foreman or evm
+### Running manageiq (3 options)
 
 To run manageiq in the foreground, you can either run the rails server directly with `miq_mac_dev/rails`, or run it yourself:
 
@@ -62,6 +62,8 @@ cd manageiq
 bundle exec rake evm:start
 ```
 
+At this point you should be able to view the rails application at http://localhost:3000/
+
 ### Running manageiq-ui-classic with webpack-dev-server
 
 You can use `miq_mac_dev/webpack`, or run WDS yourself:
@@ -70,3 +72,5 @@ You can use `miq_mac_dev/webpack`, or run WDS yourself:
 cd manageiq-ui-classic
 env NODE_ENV=development ./node_modules/.bin/webpack-dev-server --config config/webpack/development.js
 ```
+
+Then you can view the hot-reloading webpack-dev-server at http://localhost:8080/
