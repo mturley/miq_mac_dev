@@ -39,13 +39,6 @@ cd manageiq/plugins
 git clone https://github.com/ManageIQ/manageiq-ui-classic
 
 if [ "$1" = "--with-v2v-plugin" ] ; then
-  echo "[v2v only] Switching to priley's v2v branch of manageiq-ui-classic..."
-  cd manageiq-ui-classic
-  git remote add priley https://github.com/priley86/manageiq-ui-classic.git
-  git fetch priley v2v:v2v
-  git checkout v2v
-  cd ..
-
   echo "[v2v only] Cloning the miq_v2v_ui_plugin repository..."
   git clone https://github.com/priley86/miq_v2v_ui_plugin
 
