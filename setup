@@ -51,6 +51,8 @@ if [ "$1" = "--with-v2v-plugin" ] ; then
 
   echo "[v2v only] Setting up miq_v2v_ui_plugin..."
   cd miq_v2v_ui_plugin
+  git fetch origin migration-poc # TODO delete me if we go back to master
+  git checkout migration-poc     # TODO delete me if we go back to master
   npm install
   cd ..
 fi
