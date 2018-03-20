@@ -50,13 +50,14 @@ if [ "$1" = "--with-v2v-plugin" ] ; then
   git fetch origin migration-poc # TODO delete me if we go back to master
   git checkout migration-poc     # TODO delete me if we go back to master
   npm install
-  cd ..
+
+  echo "Creating/replacing manageiq/Gemfile..."
+  cd ../../../
+  cp -v miq_mac_dev/Gemfile.example manageiq/Gemfile
+else
+  cd ../../
 fi
 
-cd ../../
-
-echo "Creating/replacing manageiq/Gemfile..."
-cp -v miq_mac_dev/Gemfile.example manageiq/Gemfile
 echo "Creating/replacing manageiq/Procfile..."
 cp -v miq_mac_dev/Procfile.example manageiq/Procfile
 echo "Creating/replacing manageiq/bundler.d/Gemfile.dev.rb..."
