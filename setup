@@ -47,8 +47,12 @@ if [ "$1" = "--with-v2v-plugin" ] ; then
 
   echo "[v2v only] Setting up miq_v2v_ui_plugin..."
   cd miq_v2v_ui_plugin
-  git fetch origin migration-poc # TODO delete me if we go back to master
-  git checkout migration-poc     # TODO delete me if we go back to master
+  git remote rename origin upstream
+  git fetch upstream sprint5
+  git checkout sprint5
+  git remote add origin git@github.com:mturley/miq_v2v_ui_plugin.git
+  git fetch origin wizard-abstraction
+  git checkout wizard-abstraction
   npm install
 
   echo "Creating/replacing manageiq/Gemfile..."
