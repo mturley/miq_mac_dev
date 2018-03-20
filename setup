@@ -4,6 +4,9 @@
 WD=`pwd`; SCRIPT=`realpath $0`; cd `dirname $SCRIPT`
 source ~/.rvm/scripts/rvm; rvm use 2.4.2
 
+echo "Checking for homebrew upgrades..."
+brew upgrade
+
 echo "Checking/installing homebrew dependencies..."
 brew install git pkg-config memcached postgresql cmake node yarn
 
