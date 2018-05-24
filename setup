@@ -43,20 +43,15 @@ git clone https://github.com/ManageIQ/manageiq-ui-classic
 
 if [ "$1" = "--with-v2v-plugin" ] ; then
   echo "[v2v only] Cloning the miq_v2v_ui_plugin repository..."
-  git clone https://github.com/priley86/miq_v2v_ui_plugin
+  git clone https://github.com/ManageIQ/miq_v2v_ui_plugin
 
   echo "[v2v only] Setting up miq_v2v_ui_plugin..."
   cd miq_v2v_ui_plugin
-  git fetch origin migration-poc # TODO delete me if we go back to master
-  git checkout migration-poc     # TODO delete me if we go back to master
   npm install
-
-  echo "Creating/replacing manageiq/Gemfile..."
-  cd ../../../
-  cp -v miq_mac_dev/Gemfile.example manageiq/Gemfile
-else
-  cd ../../
+  cd ../
 fi
+
+cd ../../ # plugins -> manageiq -> (parent)
 
 echo "Creating/replacing manageiq/Procfile..."
 cp -v miq_mac_dev/Procfile.example manageiq/Procfile
@@ -80,7 +75,7 @@ bin/setup
 bin/update
 bundle exec rake update:ui
 
-echo "DONE!"
+echo "DONE! But don't forget to import your database, if you haven't already."
 echo
 echo "To start the manageiq rails server directly (foreground option 1):"
 echo "  miq_mac_dev/rails"
