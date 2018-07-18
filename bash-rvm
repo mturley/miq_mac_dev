@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+bash --init-file <(source ~/.rvm/scripts/rvm; rvm use 2.4.2)
