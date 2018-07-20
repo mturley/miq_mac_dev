@@ -11,6 +11,11 @@ brew upgrade
 echo "Checking/installing homebrew dependencies..."
 brew install git pkg-config memcached postgresql cmake node@8 yarn gpg
 
+echo "Linking (node, npm, npx) from Homebrew's node@8 into /usr/local/opt..."
+ln -s /usr/local/opt/node@8/bin/node /usr/local/bin/node
+ln -s /usr/local/opt/node@8/bin/npm /usr/local/bin/npm
+ln -s /usr/local/opt/node@8/bin/npx /usr/local/bin/npx
+
 echo "Installing rvm and ruby-2.4.2..."
 curl -sSL https://get.rvm.io | bash -s stable --ruby
 rvm install "ruby-2.4.2"
