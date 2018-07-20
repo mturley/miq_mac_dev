@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# Available options: --with-v2v-plugin
+# Available options:
+#   --no-v2v-plugin (V2V dev repo is now installed by default)
+#   --mturley-remote (add the remote for mturley's v2v fork)
 
 WD=`pwd`; SCRIPT=`realpath $0`; cd `dirname $SCRIPT`
 
@@ -7,7 +9,7 @@ echo "Checking for homebrew upgrades..."
 brew upgrade
 
 echo "Checking/installing homebrew dependencies..."
-brew install git pkg-config memcached postgresql cmake node yarn gpg
+brew install git pkg-config memcached postgresql cmake node@8 yarn gpg
 
 echo "Installing rvm and ruby-2.4.2..."
 curl -sSL https://get.rvm.io | bash -s stable --ruby
@@ -24,6 +26,12 @@ gem install bundler
 echo "Checking/installing foreman..."
 gem install foreman
 
+echo "Installing sys-proctable 1.1.5 (was breaking things for some reason)..."
+gem install sys-proctable -v 1.1.5
+
+echo "Updating npm..."
+sudo npm install -g npm
+
 echo "Checking/installing npm dependencies..."
 sudo npm install -g bower yarn gulp-cli webpack
 
@@ -39,6 +47,12 @@ echo "Enabling Memcached on boot..."
 ln -sfv /usr/local/opt/memcached/homebrew.mxcl.memcached.plist ~/Library/LaunchAgents
 launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.memcached.plist
 
+printf "\n\n"
+echo "- - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+echo "  That's it for non-npm dependencies. Here comes git!  "
+echo "- - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+printf "\n"
+
 echo "Cloning the manageiq and manageiq-ui-classic repositories..."
 cd ..
 git clone https://github.com/ManageIQ/manageiq.git
@@ -46,12 +60,20 @@ mkdir -p manageiq/plugins
 cd manageiq/plugins
 git clone https://github.com/ManageIQ/manageiq-ui-classic
 
-if [ "$1" = "--with-v2v-plugin" ] ; then
-  echo "[v2v only] Cloning the miq_v2v_ui_plugin repository..."
+if [ "$1" != "--no-v2v-plugin" ] ; then
+  echo "Cloning the miq_v2v_ui_plugin repository..."
   git clone https://github.com/ManageIQ/miq_v2v_ui_plugin
 
-  echo "[v2v only] Setting up miq_v2v_ui_plugin..."
+  echo "Setting up miq_v2v_ui_plugin..."
   cd miq_v2v_ui_plugin
+  if [ "$1" = "--mturley-remote" ] ; then
+    git remote add mturley git@github.com:mturley/miq_v2v_ui_plugin.git
+    git fetch mturley
+  fi
+
+  # Note: this is where you'd want to switch branches if not using master.
+  # git checkout mikes-awesome-feature
+
   npm install
   cd ../
 fi
@@ -66,6 +88,7 @@ cp -v miq_mac_dev/Gemfile.dev.rb.example manageiq/bundler.d/Gemfile.dev.rb
 
 echo "Setting up manageiq..."
 cd manageiq
+bundle install
 bin/setup
 bin/update
 cd ..
@@ -76,6 +99,7 @@ ln -sv ../../../ manageiq/plugins/manageiq-ui-classic/spec/manageiq
 echo "Setting up manageiq-ui-classic..."
 cd manageiq/plugins/manageiq-ui-classic
 npm install
+bundle install
 bin/setup
 bin/update
 bundle exec rake update:ui
