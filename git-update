@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+WD=`pwd`; SCRIPT=`realpath $0`; cd `dirname $SCRIPT`
+source ~/.rvm/scripts/rvm; rvm use 2.4.2
+
+cd ../manageiq
+git pull
+cd plugins/manageiq-ui-classic
+git pull
+npm install
+cd ../manageiq-v2v
+git pull
+npm install
+cd ../manageiq-api
+git pull
+cd ../..
+bin/update
+
+cd $WD
