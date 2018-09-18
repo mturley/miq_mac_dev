@@ -4,6 +4,6 @@ WD=`pwd`; SCRIPT=`realpath $0`; cd `dirname $SCRIPT`
 source ~/.rvm/scripts/rvm; rvm use 2.4.2
 
 cd ../manageiq
-bundle exec rails runner "simulate_queue_worker"
+echo "simulate_queue_worker" | bundle exec rails console
 
 cd $WD
