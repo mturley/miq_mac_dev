@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+WD=`pwd`; SCRIPT=`realpath $0`; cd `dirname $SCRIPT`
+source ~/.rvm/scripts/rvm; rvm use 2.4.2
+
+dropdb $1
+createdb -O root $2
+cd ~/miqdb
+psql -U root $2 < $3
+cd ~/git/manageiq
+bundle exec tools/fix_auth.rb --invalid bogus $2
+./bin/rails db:migrate
+
+cd $WD
