@@ -77,3 +77,7 @@ This guide assumes you already have a working ManageIQ development environment, 
 Your browser will make requests to webpack-dev-server on port 8080, which will proxy to nginx on port 3000. nginx will route most of your traffic to your local rails server on port 3030, but your API requests will be routed to the remote appliance!
 
 To test it out, make a UI change and verify that you can see your local change with remote data.
+
+# Known Issues
+
+* The websocket connection (`/ws/notifications`) will not be forwarded to the appliance. You may see console errors about this connection, and websocket-based features like backend-driven notifications will not work.
