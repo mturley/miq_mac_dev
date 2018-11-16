@@ -65,6 +65,12 @@ This guide assumes you already have a working ManageIQ development environment, 
     nginx -s stop
     ```
 
+    If you make changes to the nginx config files while it is running (e.g. to switch appliances), you can reload them:
+
+    ```
+    nginx -s reload
+    ```
+
 3. Start webpack-dev-server as you normally would, either with the `manageiq-ui-classic/bin/webpack-dev-server` script, or directly with:
     ```
     cd manageiq/plugins/manageiq-ui-classic
