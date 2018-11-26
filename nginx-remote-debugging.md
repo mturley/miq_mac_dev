@@ -37,7 +37,7 @@ This guide assumes you already have a working ManageIQ development environment, 
             add_header 'Access-Control-Allow-Headers' 'X-CSRF-Token';
             proxy_hide_header Content-Security-Policy;
             proxy_redirect off;
-            proxy_pass https://cf-osp.v2v.bos.redhat.com/api/;
+            proxy_pass https://APPLIANCE_ADDRESS/api/;
         }
 
         location / {
