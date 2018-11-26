@@ -31,8 +31,13 @@ This guide assumes you already have a working ManageIQ development environment, 
         location /api/ {
             proxy_set_header Host      $host;
             proxy_set_header X-Real-IP $remote_addr;
+            proxy_hide_header Access-Control-Allow-Origin;
+            add_header 'Access-Control-Allow-Origin' 'http://0.0.0.0:8080';
+            add_header 'Access-Control-Allow-Credentials' 'true';
+            add_header 'Access-Control-Allow-Headers' 'X-CSRF-Token';
+            proxy_hide_header Content-Security-Policy;
             proxy_redirect off;
-            proxy_pass https://APPLIANCE_ADDRESS/api/;
+            proxy_pass https://cf-osp.v2v.bos.redhat.com/api/;
         }
 
         location / {
