@@ -40,7 +40,7 @@ This guide assumes you already have a working ManageIQ development environment, 
 
 2. In `manageiq-ui-classic`, run webpack-dev-server with your new config file, passing the additional environment flag `NODE_TLS_REJECT_UNAUTHORIZED=0`. For example:
 
-    ```
+    ```sh
     env NODE_ENV=development NODE_TLS_REJECT_UNAUTHORIZED=0 WEBPACK_EXCLUDE_NODE_MODULES=1 \
         ./node_modules/.bin/webpack-dev-server --config config/webpack/development-remote.js
     ```
