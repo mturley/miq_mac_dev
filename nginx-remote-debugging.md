@@ -4,6 +4,8 @@
 
 ## Note: I found a better way to do this, simply using the webpack-dev-server's built in proxy settings.
 
+### See this new document for details: https://github.com/mturley/miq_mac_dev/blob/master/webpack-remote-debugging.md
+
 I'll leave this document here for posterity, and document the new process soon.
 
 ---------
