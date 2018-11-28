@@ -1,5 +1,13 @@
 # Remote debugging ManageIQ with nginx reverse proxy
 
+---------
+
+## Note: I found a better way to do this, simply using the webpack-dev-server's built in proxy settings.
+
+I'll leave this document here for posterity, and document the new process soon.
+
+---------
+
 This guide provides a method for running a local ManageIQ UI development environment which sends all its API requests to a remote appliance. We can use this to test new UI changes in V2V with real migrations.
 
 This guide assumes you already have a working ManageIQ development environment, where you can run webpack-dev-server proxying to rails. It is written for developers using Mac OS, but it could be adapted easily for Linux.
