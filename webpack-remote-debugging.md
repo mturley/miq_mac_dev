@@ -1,4 +1,4 @@
-# Remote debugging ManageIQ with webpack-dev-server proxy settings
+# Remote debugging ManageIQ with webpack-dev-server
 
 This guide provides a method for running a local ManageIQ UI development environment which sends all its API requests to a remote appliance. We can use this to test new UI changes in V2V with real migrations.
 
