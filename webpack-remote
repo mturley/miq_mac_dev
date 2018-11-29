@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+WD=`pwd`; SCRIPT=`realpath $0`; cd `dirname $SCRIPT`
+
+cd ../manageiq/plugins/manageiq-ui-classic
+env NODE_ENV=development NODE_TLS_REJECT_UNAUTHORIZED=0 WEBPACK_EXCLUDE_NODE_MODULES=1 ./node_modules/.bin/webpack-dev-server --config config/webpack/development-remote.js
+
+cd $WD
