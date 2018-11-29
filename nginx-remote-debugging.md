@@ -1,5 +1,15 @@
 # Remote debugging ManageIQ with nginx reverse proxy
 
+---------
+
+## Note: I found a better way to do this, simply using the webpack-dev-server's built in proxy settings.
+
+### Use this guide instead: https://github.com/mturley/miq_mac_dev/blob/master/webpack-remote-debugging.md
+
+I'll leave this document here for posterity.
+
+---------
+
 This guide provides a method for running a local ManageIQ UI development environment which sends all its API requests to a remote appliance. We can use this to test new UI changes in V2V with real migrations.
 
 This guide assumes you already have a working ManageIQ development environment, where you can run webpack-dev-server proxying to rails. It is written for developers using Mac OS, but it could be adapted easily for Linux.
@@ -31,6 +41,11 @@ This guide assumes you already have a working ManageIQ development environment, 
         location /api/ {
             proxy_set_header Host      $host;
             proxy_set_header X-Real-IP $remote_addr;
+            proxy_hide_header Access-Control-Allow-Origin;
+            add_header 'Access-Control-Allow-Origin' 'http://0.0.0.0:8080';
+            add_header 'Access-Control-Allow-Credentials' 'true';
+            add_header 'Access-Control-Allow-Headers' 'X-CSRF-Token';
+            proxy_hide_header Content-Security-Policy;
             proxy_redirect off;
             proxy_pass https://APPLIANCE_ADDRESS/api/;
         }
