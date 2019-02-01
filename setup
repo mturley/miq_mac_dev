@@ -68,8 +68,9 @@ if [ "$1" != "--no-v2v-plugin" ] ; then
   echo "Setting up manageiq-v2v..."
   cd manageiq-v2v
   if [ "$1" = "--mturley-remote" ] ; then
-    git remote add mturley git@github.com:mturley/manageiq-v2v.git
-    git fetch mturley
+    git remote rename origin upstream
+    git remote add origin git@github.com:mturley/manageiq-v2v.git
+    git fetch origin
   fi
 
   # Note: this is where you'd want to switch branches if not using master.
