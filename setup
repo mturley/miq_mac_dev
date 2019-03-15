@@ -9,7 +9,7 @@ echo "Checking for homebrew upgrades..."
 brew upgrade
 
 echo "Checking/installing homebrew dependencies..."
-brew install git pkg-config memcached postgresql@9.5 cmake yarn gpg
+brew install git pkg-config memcached postgresql cmake yarn gpg
 
 # TODO install node and npm and setup webpack properly!!!!!!
 
@@ -38,8 +38,7 @@ echo "Checking/installing npm dependencies..."
 sudo npm install -g bower yarn gulp-cli webpack webpack-dev-server
 
 echo "Enabling PostgreSQL on boot..."
-brew services start postgresql@9.5
-echo 'export PATH="/usr/local/opt/postgresql@9.5/bin:$PATH"' >> ~/.bash_profile
+brew services start postgresql
 
 echo "Creating the ManageIQ superuser..."
 psql -d postgres -c "CREATE ROLE root SUPERUSER LOGIN PASSWORD 'smartvm'"
