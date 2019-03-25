@@ -3,12 +3,15 @@
 WD=`pwd`; SCRIPT=`realpath $0`; cd `dirname $SCRIPT`
 source ~/.rvm/scripts/rvm; rvm use 2.4.2
 
-dropdb $1 || exit 1
-createdb -O root $2
+dbname=$1
+dumpfile=${2:-$1}
+
+dropdb $dbname || exit 1
+createdb -O root $dbname
 cd ~/miqdb
-psql -U root $2 < $3
+psql -U root $dbname < $dumpfile
 cd ~/git/manageiq
-bundle exec tools/fix_auth.rb --invalid bogus $2
+bundle exec tools/fix_auth.rb --invalid bogus $dbname
 ./bin/rails db:migrate
 
 cd $WD
