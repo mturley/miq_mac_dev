@@ -32,9 +32,6 @@ gem install bundler
 echo "Checking/installing foreman..."
 gem install foreman
 
-echo "Installing sys-proctable 1.1.5 (was breaking things for some reason)..."
-gem install sys-proctable -v 1.1.5
-
 echo "Updating npm..."
 sudo npm install -g npm
 
@@ -93,6 +90,7 @@ cp -v miq_mac_dev/Gemfile.dev.rb.example manageiq/bundler.d/Gemfile.dev.rb
 
 echo "Setting up manageiq..."
 cd manageiq
+bundle config specific_platform true
 bundle install
 bin/setup
 bin/update
