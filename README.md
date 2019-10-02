@@ -8,7 +8,7 @@ This repo's `setup` script will perform all the steps of the [ManageIQ Developer
 
 1. Install Homebrew, if you don't have it already: https://brew.sh/
 
-2. Install `rvm` (https://rvm.io/) and then run `rvm install 2.5.3` (Note: the helper scripts all require `rvm`. If you want to use `rbenv` or something else, you'll just need to change the top of each script. The important thing is that you load ruby 2.5.3)
+2. Install `rvm` (https://rvm.io/) and then run `rvm install 2.5.5` (Note: the helper scripts all require `rvm`. If you want to use `rbenv` or something else, you'll just need to change the top of each script. The important thing is that you load ruby 2.5.5)
 
 3. Clone this repo in the directory where you want your manageiq repositories cloned:
 
