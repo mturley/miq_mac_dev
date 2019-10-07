@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+WD=`pwd`; SCRIPT=`realpath $0`; cd `dirname $SCRIPT`
+source ~/.rvm/scripts/rvm; rvm use 2.5.5
+
+repos_skipped=()
+
+get_branch_name() {
+  branch_name=$(git symbolic-ref -q HEAD)
+  branch_name=${branch_name##refs/heads/}
+  echo $branch_name
+}
+
+pull_if_on_master() {
+  echo
+  repo_name=${PWD##*/}
+  branch_name=$(get_branch_name)
+  echo "=== $repo_name ==="
+  if [ "$branch_name" == "master" ]; then
+    echo "Pulling from upstream master"
+    git pull upstream master
+  else
+    echo "Skipping (master branch is not checked out)"
+    repos_skipped+=("$repo_name")
+  fi
+}
+
+cd ../manageiq/
+pull_if_on_master
+cd plugins/manageiq-ui-classic
+pull_if_on_master
+cd ../manageiq-api
+pull_if_on_master
+cd ../manageiq-v2v
+pull_if_on_master
+cd ../cfme-migration_analytics
+pull_if_on_master
+
+num_repos_skipped=${#repos_skipped[@]}
+
+echo
+echo "All done!"
+
+if [ "$num_repos_skipped" != "0" ]; then
+  echo
+  echo "Some repos were skipped (master branch is not checked out):"
+  for repo in ${repos_skipped[@]}; do
+    echo "    $repo"
+  done
+fi
+
+cd $WD
