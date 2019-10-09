@@ -49,4 +49,5 @@ if [ "$num_repos_skipped" != "0" ]; then
   done
 fi
 
+echo
 cd $WD
