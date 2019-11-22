@@ -17,7 +17,6 @@ pull_if_on_master() {
   branch_name=$(get_branch_name)
   echo "=== $repo_name ==="
   if [ "$branch_name" == "master" ]; then
-    echo "Pulling from upstream master"
     git pull upstream master
   else
     echo "Skipping (master branch is not checked out)"
@@ -35,6 +34,13 @@ cd ../manageiq-v2v
 pull_if_on_master
 cd ../cfme-migration_analytics
 pull_if_on_master
+echo
+echo "Unlinking before pulling cfme_productization..."
+cd ../../../cfme_productization
+ruby unlink.rb
+pull_if_on_master
+echo
+ruby link.rb
 
 num_repos_skipped=${#repos_skipped[@]}
 
