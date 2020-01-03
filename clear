@@ -4,7 +4,6 @@ WD=`pwd`; SCRIPT=`realpath $0`; cd `dirname $SCRIPT`
 source ~/.rvm/scripts/rvm; rvm use 2.5.5
 
 cd ../manageiq
-bundle exec rake assets:clobber
-bundle exec rake assets:precompile
+bin/rails log:clear tmp:clear
 
 cd $WD
