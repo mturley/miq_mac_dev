@@ -34,13 +34,19 @@ cd ../manageiq-v2v
 pull_if_on_master
 cd ../cfme-migration_analytics
 pull_if_on_master
-echo
-echo "Unlinking before pulling cfme_productization..."
-cd ../../../cfme_productization
-ruby unlink.rb
-pull_if_on_master
-echo
-ruby link.rb
+
+if [ "$1" != "--skip-prod" ] ; then
+  echo
+  echo "Unlinking before pulling cfme_productization..."
+  cd ../../../cfme_productization
+  ruby unlink.rb
+  pull_if_on_master
+  echo
+  ruby link.rb
+else
+  echo
+  echo "Skipping cfme_productization because --skip-prod option was used."
+fi
 
 num_repos_skipped=${#repos_skipped[@]}
 
