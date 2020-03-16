@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-bash --init-file <(echo "source ~/.bash_profile; source ~/.rvm/scripts/rvm; rvm use 2.5.5; nvm use 8; echo \"In `pwd`\"")

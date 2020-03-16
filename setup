@@ -17,11 +17,7 @@ echo 'export PATH="/usr/local/opt/postgresql@10/bin:$PATH"' >> ~/.bash_profile
 
 # TODO install node and npm and setup webpack properly!!!!!!
 
-echo "Installing rvm and ruby-2.5.5..."
-curl -sSL https://get.rvm.io | bash -s stable --ruby
-rvm install "ruby-2.5.5"
-source ~/.rvm/scripts/rvm;
-rvm use 2.5.5
+# TODO use rbenv instead of rvm!
 
 echo "Unlinking homebrew's xz if present to prevent conflicts with system xz libraries..."
 brew unlink xz

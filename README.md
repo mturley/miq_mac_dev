@@ -8,6 +8,8 @@ This repo's `setup` script will perform all the steps of the [ManageIQ Developer
 
 1. Install Homebrew, if you don't have it already: https://brew.sh/
 
+### TODO: update this to detail rbenv instead of rvm. rvm stuff has been removed
+
 2. Install `rvm` (https://rvm.io/) and then run `rvm install 2.5.5` (Note: the helper scripts all require `rvm`. If you want to use `rbenv` or something else, you'll just need to change the top of each script. The important thing is that you load ruby 2.5.5)
 
 3. Clone this repo in the directory where you want your manageiq repositories cloned:
@@ -16,7 +18,7 @@ This repo's `setup` script will perform all the steps of the [ManageIQ Developer
    git clone https://github.com/mturley/miq_mac_dev
    ```
 
-   *Note: `miq_mac_dev/setup` will move up to the directory above `miq_mac_dev` and clone siblings next to it. **Don't clone this repo in the same directory alongside existing manageiq and manageiq-ui-classic repos, use a fresh subdirectory if necessary:***
+   \*Note: `miq_mac_dev/setup` will move up to the directory above `miq_mac_dev` and clone siblings next to it. **Don't clone this repo in the same directory alongside existing manageiq and manageiq-ui-classic repos, use a fresh subdirectory if necessary:\***
 
    ```
    mkdir miq; cd miq; git clone https://github.com/mturley/miq_mac_dev
@@ -35,9 +37,9 @@ This repo's `setup` script will perform all the steps of the [ManageIQ Developer
 
 `setup` currently has one available option, therefore two possible modes to run this script in:
 
-* Use `setup` with no options to install `manageiq` and `manageiq-ui-classic` from master.
+- Use `setup` with no options to install `manageiq` and `manageiq-ui-classic` from master.
 
-* Use `setup --with-v2v-plugin` to also install priley's v2v plugin, and use the `v2v` branch of `manageiq-ui-classic` instead of master.
+- Use `setup --with-v2v-plugin` to also install priley's v2v plugin, and use the `v2v` branch of `manageiq-ui-classic` instead of master.
 
 ## Usage
 
