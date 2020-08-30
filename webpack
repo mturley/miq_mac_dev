@@ -3,6 +3,7 @@
 WD=`pwd`; SCRIPT=`realpath $0`; cd `dirname $SCRIPT`
 
 cd ../manageiq/plugins/manageiq-ui-classic
-bin/webpack-dev-server
+env NODE_ENV=development NODE_TLS_REJECT_UNAUTHORIZED=0 WEBPACK_EXCLUDE_NODE_MODULES=1 ./node_modules/.bin/webpack-dev-server --config config/webpack/development.js
+# bin/webpack-dev-server
 
 cd $WD
